@@ -135,7 +135,10 @@ export default function About() {
         <h2>Score: {isScore}</h2>
       </div>
       {/* Start Info */}
-      <div className="h-[1000px] w-[1600px] relative bg-transparent bg-[#E2E8F0]  justify-self-center self-center">
+      <div
+        className="h-[1000px] w-[1600px] relative bg-transparent   justify-self-center self-center"
+        style={{ backgroundColor: "#E2E8F0" }}
+      >
         {isStart ? null : (
           <p
             className="z-20 absolute bg-green-700 text-green-50 p-2 rounded-full opacity-90"
