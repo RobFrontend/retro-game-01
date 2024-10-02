@@ -36,7 +36,7 @@ export default function About() {
   // *************************************
   // Restarting, Starting, Time ending, Counting, Point icon
   useEffect(() => {
-    // Reset of part of states to restart game
+    // Reset of part of states to restart
     if (isRestart) {
       setIsPointLeft(Math.floor(Math.random() * 1560));
       setIsPointTop(Math.floor(Math.random() * 940));
@@ -99,7 +99,7 @@ export default function About() {
         setToSide((l) => l - 5);
         setIsRotate(-45);
       }
-      if (e.key === "e" && toSide <= 1560 && toTop >= -15) {
+      if (e.key === "e" && toSide <= 1560 && toTop <= 940) {
         setToTop((t) => t + 5);
         setToSide((l) => l + 5);
         setIsRotate(45);
