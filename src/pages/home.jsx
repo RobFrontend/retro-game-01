@@ -16,6 +16,7 @@ export default function About() {
   const [isScore, setIsScore] = useState(0);
   const [isRestart, setIsRestart] = useState(false);
   const [isHighScore, setIsHighScore] = useState(0);
+  const [isCar, setIsCar] = useState("bluecar.png");
 
   // *****************
   // Starting game by clicking on vehicle/hero
@@ -72,6 +73,11 @@ export default function About() {
   // **************************************
   // Steering, rotating, gaining points
   const key = (e) => {
+    let carSpeed;
+    if (isCar === "bluecar.png") carSpeed = 5;
+    if (isCar === "greencar.png") carSpeed = 7;
+    if (isCar === "redcar.png") carSpeed = 9;
+    if (isCar === "blackcar.png") carSpeed = 11;
     e.preventDefault();
     // e.stopPropagation();
     console.log(e.key);
@@ -79,29 +85,29 @@ export default function About() {
       // *********************************
       // steering
       if (e.key === "w" && toTop <= 940) {
-        setToTop((t) => t + 5);
+        setToTop((t) => t + carSpeed);
         setIsRotate(0);
       }
       if (e.key === "s" && toTop >= -15) {
-        setToTop((t) => t - 5);
+        setToTop((t) => t - carSpeed);
         setIsRotate(180);
       }
       if (e.key === "d" && toSide <= 1560) {
-        setToSide((l) => l + 5);
+        setToSide((l) => l + carSpeed);
         setIsRotate(90);
       }
       if (e.key === "a" && toSide >= 0) {
-        setToSide((l) => l - 5);
+        setToSide((l) => l - carSpeed);
         setIsRotate(-90);
       }
       if (e.key === "q" && toSide >= 0 && toTop <= 940) {
-        setToTop((t) => t + 5);
-        setToSide((l) => l - 5);
+        setToTop((t) => t + carSpeed);
+        setToSide((l) => l - carSpeed);
         setIsRotate(-45);
       }
       if (e.key === "e" && toSide <= 1560 && toTop <= 940) {
-        setToTop((t) => t + 5);
-        setToSide((l) => l + 5);
+        setToTop((t) => t + carSpeed);
+        setToSide((l) => l + carSpeed);
         setIsRotate(45);
       }
       // *************************
@@ -163,6 +169,71 @@ export default function About() {
           Restart
         </button>
       </div>
+      {/* Choose Car */}
+      {isStart && !isRestart ? null : (
+        <div className="absolute top-12 right-8 text-slate-100 grid gap-6 justify-items-center text-center">
+          <h2>
+            Choose<br></br> your car:
+          </h2>
+          <div className="py-2 px-3 shadow-md bg-slate-700 grid justify-items-center ">
+            <button onClick={() => setIsCar("bluecar.png")}>
+              <img src="bluecar.png" className="h-12 self-center" />
+            </button>
+            <p>
+              Speed:<br></br>5
+            </p>
+          </div>
+          <div className="py-2 px-3 shadow-md bg-slate-700 grid justify-items-center ">
+            <button
+              onClick={() => isHighScore >= 7 && setIsCar("greencar.png")}
+            >
+              <img src="greencar.png" className="h-12 self-center" />
+            </button>
+            {isHighScore >= 7 ? (
+              <p>
+                Speed:<br></br>7
+              </p>
+            ) : (
+              <p>
+                Minimum<br></br>Highscore<br></br>to unlock:
+                <br></br>7
+              </p>
+            )}
+          </div>
+          <div className="py-2 px-3 shadow-md bg-slate-700 grid justify-items-center ">
+            <button onClick={() => isHighScore >= 9 && setIsCar("redcar.png")}>
+              <img src="redcar.png" className="h-12 self-center" />
+            </button>
+            {isHighScore >= 9 ? (
+              <p>
+                Speed:<br></br>9
+              </p>
+            ) : (
+              <p>
+                Minimum<br></br>Highscore<br></br>to unlock:
+                <br></br>9
+              </p>
+            )}
+          </div>
+          <div className="py-2 px-3 shadow-md bg-slate-700 grid justify-items-center ">
+            <button
+              onClick={() => isHighScore >= 11 && setIsCar("blackcar.png")}
+            >
+              <img src="blackcar.png" className="h-12 self-center" />
+            </button>
+            {isHighScore >= 11 ? (
+              <p>
+                Speed:<br></br>11
+              </p>
+            ) : (
+              <p>
+                Minimum<br></br>Highscore<br></br>to unlock:
+                <br></br>11
+              </p>
+            )}
+          </div>
+        </div>
+      )}
       {/* Start Info */}
       <div
         className="h-[1000px] w-[1600px] relative bg-transparent   justify-self-center self-center"
@@ -182,7 +253,7 @@ export default function About() {
         {/* Car */}
         <button onKeyDown={key} onClick={hideStart} className="bg-none">
           <img
-            src="car.png"
+            src={isCar}
             className={`max-w-[36px] absolute transition-transform duration-200  ease-in-out drop-shadow-md z-10`}
             style={{
               bottom: `${isTop}px`,
