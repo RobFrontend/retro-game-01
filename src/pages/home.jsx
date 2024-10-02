@@ -15,6 +15,7 @@ export default function About() {
   const [isTimeEnd, setIsTimeEnd] = useState(false);
   const [isScore, setIsScore] = useState(0);
   const [isRestart, setIsRestart] = useState(false);
+  const [isHighScore, setIsHighScore] = useState(0);
 
   function hideStart() {
     setIsStart(true);
@@ -38,6 +39,7 @@ export default function About() {
       setIsTimeEnd(false);
     }
     if (isStart) {
+      isScore > isHighScore && setIsHighScore(isScore);
       if (isPointLeft === null && isPointTop === null) {
         setIsPointLeft(Math.floor(Math.random() * 1560));
         setIsPointTop(Math.floor(Math.random() * 940));
@@ -136,6 +138,7 @@ export default function About() {
           <b>D</b> to go Right
         </h2>
         <h2>Score: {isScore}</h2>
+        <h2>HighScore: {isHighScore}</h2>
         <button
           onClick={() => setIsTimeEnd(true)}
           className="border-slate-300 p-2 border-[1px] rounded-full mt-2 w-full bg-red-700"
@@ -148,7 +151,7 @@ export default function About() {
         className="h-[1000px] w-[1600px] relative bg-transparent   justify-self-center self-center"
         style={{ backgroundColor: "#E2E8F0" }}
       >
-        {isStart ? null : (
+        {isStart && !isRestart ? null : (
           <p
             className="z-20 absolute bg-green-700 text-green-50 p-2 rounded-full opacity-90"
             style={{
@@ -162,7 +165,7 @@ export default function About() {
         {/* Car */}
         <button onKeyDown={key} onClick={hideStart} className="bg-none">
           <img
-            src="car.jpg"
+            src="car.png"
             className={`max-w-[36px] absolute transition-transform duration-200  ease-in-out drop-shadow-md z-10`}
             style={{
               bottom: `${isTop}px`,
@@ -173,7 +176,15 @@ export default function About() {
         </button>
         {/* Point */}
 
-        <div
+        <img
+          src="bluepoint.png"
+          className="z-40 absolute max-w-8 drop-shadow-md"
+          style={{
+            bottom: `${isPointTop}px`,
+            left: `${isPointLeft}px`,
+          }}
+        />
+        {/* <div
           className="z-40 absolute"
           style={{
             bottom: `${isPointTop}px`,
@@ -181,7 +192,7 @@ export default function About() {
           }}
         >
           💙
-        </div>
+        </div> */}
       </div>
       {/* Game Over */}
       {isTimeEnd && !isRestart ? (
@@ -189,7 +200,9 @@ export default function About() {
           <h1 className="text-6xl text-red-800 font-bold ">Game Over!</h1>
           <h2 className="text-4xl ">
             Your score: <span className="font-bold">{isScore}</span>
+            <br></br>Highscore: <span className="font-bold">{isHighScore}</span>
           </h2>
+
           <button
             onClick={() => setIsRestart(true)}
             className="mt-4 text-2xl text-green-800 font-bold border-2 rounded-md border-green-800 px-6 py-2 hover:opacity-80 transition-all duration-300"
