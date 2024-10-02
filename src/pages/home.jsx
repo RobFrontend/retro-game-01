@@ -143,11 +143,26 @@ export default function About() {
   return (
     <div className="grid min-h-screen bg-slate-800">
       {/* Timer */}
-      <div className="absolute text-slate-700 top-12 right-1/2 translate-x-1/2 z-20">
-        <h2 className="text-4xl">Time left: {isTime}</h2>
+
+      <div className="absolute text-slate-700 top-12 right-1/2 translate-x-1/2 z-20 flex gap-6 items-end">
+        <h2 className="text-xl">
+          Score: <span className="font-bold">{isScore}</span>
+        </h2>
+        <h2 className="text-4xl">
+          Time left: <span className="font-bold">{isTime}</span>
+        </h2>
+        <h2 className="text-xl">
+          HighScore: <span className="font-bold">{isHighScore}</span>
+        </h2>
       </div>
       {/* Legend */}
-      <div className="absolute top-12 left-6 text-slate-100">
+      <div className="absolute top-12 right-8 text-slate-100">
+        <button
+          onClick={() => setIsTimeEnd(true)}
+          className=" p-2  rounded-full mb-6 w-full bg-red-700 hover:bg-red-600 transition-all duration-300"
+        >
+          Restart
+        </button>
         <h2>
           <b>W</b> to go Up
         </h2>
@@ -160,18 +175,10 @@ export default function About() {
         <h2>
           <b>D</b> to go Right
         </h2>
-        <h2 className="mt-6">Score: {isScore}</h2>
-        <h2>HighScore: {isHighScore}</h2>
-        <button
-          onClick={() => setIsTimeEnd(true)}
-          className="border-slate-300 p-2 border-[1px] rounded-full mt-6 w-full bg-red-700"
-        >
-          Restart
-        </button>
       </div>
       {/* Choose Car */}
       {isStart && !isRestart ? null : (
-        <div className="absolute top-12 right-8 text-slate-100 grid gap-6 justify-items-center text-center">
+        <div className="absolute top-12 left-8 text-slate-100 grid gap-6 justify-items-center text-center">
           <h2>
             Choose<br></br> your car:
           </h2>
