@@ -87,6 +87,9 @@ export default function About() {
         setToSide((l) => l + 5);
         setIsRotate(45);
       }
+      if (e.key === "Escape") {
+        setIsRestart(true);
+      }
       // if (
       //   (toSide === isPointLeft - 20 || toSide === isPointLeft + 20) &&
       //   (toTop === isPointTop - 20 || toTop === isPointTop + 20)
@@ -133,6 +136,12 @@ export default function About() {
           <b>D</b> to go Right
         </h2>
         <h2>Score: {isScore}</h2>
+        <button
+          onClick={() => setIsTimeEnd(true)}
+          className="border-slate-300 p-2 border-[1px] rounded-full mt-2 w-full bg-red-700"
+        >
+          Restart
+        </button>
       </div>
       {/* Start Info */}
       <div
