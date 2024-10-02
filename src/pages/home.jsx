@@ -17,11 +17,15 @@ export default function About() {
   const [isRestart, setIsRestart] = useState(false);
   const [isHighScore, setIsHighScore] = useState(0);
 
+  // *****************
+  // Starting game by clicking on vehicle/hero
   function hideStart() {
     setIsStart(true);
     setIsRestart(false);
   }
 
+  // *******************
+  //  Setting car to start position after restart
   useEffect(() => {
     if (isRestart) {
       setToTop(0);
@@ -29,7 +33,10 @@ export default function About() {
     }
   }, [toTop, toSide, isRestart]);
 
+  // *************************************
+  // Restarting, Starting, Time ending, Counting, Point icon
   useEffect(() => {
+    // Reset of part of states to restart game
     if (isRestart) {
       setIsPointLeft(Math.floor(Math.random() * 1560));
       setIsPointTop(Math.floor(Math.random() * 940));
@@ -39,18 +46,22 @@ export default function About() {
       setIsTimeEnd(false);
     }
     if (isStart) {
+      // setting highsocre
       isScore > isHighScore && setIsHighScore(isScore);
+      // Respawn of point icon
       if (isPointLeft === null && isPointTop === null) {
         setIsPointLeft(Math.floor(Math.random() * 1560));
         setIsPointTop(Math.floor(Math.random() * 940));
         setIsRestart(false);
       }
+      // Counting
       if (isStart && isTime > 0) {
         const timeLeft = setInterval(() => {
           setIsTime((time) => time - 1);
         }, 1000);
         return () => clearInterval(timeLeft);
       }
+      // End of game if time ends
       if (isTime <= 0) {
         setIsTimeEnd(true);
         setIsStart(false);
@@ -58,11 +69,15 @@ export default function About() {
     }
   }, [isStart, isTime, isPointLeft, isPointTop, isRestart, isScore, isTimeEnd]);
 
+  // **************************************
+  // Steering, rotating, gaining points
   const key = (e) => {
     e.preventDefault();
     // e.stopPropagation();
     console.log(e.key);
     if (isStart && !isTimeEnd) {
+      // *********************************
+      // steering
       if (e.key === "w" && toTop <= 940) {
         setToTop((t) => t + 5);
         setIsRotate(0);
@@ -89,6 +104,8 @@ export default function About() {
         setToSide((l) => l + 5);
         setIsRotate(45);
       }
+      // *************************
+      // restart on escape key
       if (e.key === "Escape") {
         setIsRestart(true);
       }
@@ -98,6 +115,8 @@ export default function About() {
       // ) {
       //   setIsTime((t) => t + 20);
       // }
+      // ***************************
+      // Gaining points
       if (
         toSide >= isPointLeft - 40 &&
         toSide <= isPointLeft + 40 &&
@@ -110,8 +129,6 @@ export default function About() {
         setIsScore((s) => s + 1);
       }
     }
-    console.log(toSide);
-    console.log(toTop);
   };
   let isTop = `${toTop}`;
   let isLeft = `${toSide}`;
@@ -137,11 +154,11 @@ export default function About() {
         <h2>
           <b>D</b> to go Right
         </h2>
-        <h2>Score: {isScore}</h2>
+        <h2 className="mt-6">Score: {isScore}</h2>
         <h2>HighScore: {isHighScore}</h2>
         <button
           onClick={() => setIsTimeEnd(true)}
-          className="border-slate-300 p-2 border-[1px] rounded-full mt-2 w-full bg-red-700"
+          className="border-slate-300 p-2 border-[1px] rounded-full mt-6 w-full bg-red-700"
         >
           Restart
         </button>
