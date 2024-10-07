@@ -336,8 +336,8 @@ export default function About() {
               You should be able to see game map, restart button with legend on
               the right and Car list on the left.<br></br>
               2* If you want to change car after setting correct highscore click
-              'Escape' or 'Restart'<br></br>
-              Dont refresh the page to change your car<br></br>
+              'Escape' or 'Restart'.<br></br>
+              Do not refresh the page to change your car.<br></br>
               3* Click on car to start! Have Fun!
             </h2>
           </div>
