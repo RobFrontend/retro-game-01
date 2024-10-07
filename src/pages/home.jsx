@@ -56,7 +56,7 @@ export default function About() {
           setIsDanger3Left(Math.floor(Math.random() * 1560));
           setIsDanger3Top(Math.floor(Math.random() * 940));
         }
-      }, 2000);
+      }, 5000);
       return () => clearInterval(danger2Position);
     }
   }, [isScore]);
@@ -189,6 +189,26 @@ export default function About() {
         setIsTime((t) => t - 10);
         setIsDangerLeft(null);
         setIsDangerTop(null);
+      }
+      if (
+        toSide >= isDanger2Left - 40 &&
+        toSide <= isDanger2Left + 40 &&
+        toTop >= isDanger2Top - 40 &&
+        toTop <= isDanger2Top + 40
+      ) {
+        setIsTime((t) => t - 10);
+        setIsDanger2Left(null);
+        setIsDanger2Top(null);
+      }
+      if (
+        toSide >= isDanger3Left - 40 &&
+        toSide <= isDanger3Left + 40 &&
+        toTop >= isDanger3Top - 40 &&
+        toTop <= isDanger3Top + 40
+      ) {
+        setIsTime((t) => t - 10);
+        setIsDanger3Left(null);
+        setIsDanger3Top(null);
       }
     }
   };
