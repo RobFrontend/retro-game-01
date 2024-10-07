@@ -358,7 +358,8 @@ export default function About() {
               2* If you want to change car after setting correct highscore click
               'Escape' or 'Restart'.<br></br>
               Do not refresh the page to change your car.<br></br>
-              3* Click on car to start! Have Fun!
+              3* Click on car to start! Have Fun!<br></br>*******<br></br>
+              Game is only for desktop right now - You need keyboard
             </h2>
           </div>
         ) : null}
