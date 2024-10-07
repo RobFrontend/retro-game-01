@@ -39,10 +39,11 @@ export default function About() {
   useEffect(() => {
     // Reset of part of states to restart
     if (isRestart) {
-      setIsPointLeft(Math.floor(Math.random() * 1560));
-      setIsPointTop(Math.floor(Math.random() * 940));
+      // setIsPointLeft(Math.floor(Math.random() * 1560));
+      // setIsPointTop(Math.floor(Math.random() * 940));
+      setIsPointLeft(null);
+      setIsPointTop(null);
       setIsTime(15);
-
       setIsScore(0);
       setIsTimeEnd(false);
     }
@@ -50,7 +51,7 @@ export default function About() {
       // setting highsocre
       isScore > isHighScore && setIsHighScore(isScore);
       // Respawn of point icon
-      if (isPointLeft === null && isPointTop === null) {
+      if (isPointLeft === null && isPointTop === null && !isRestart) {
         setIsPointLeft(Math.floor(Math.random() * 1560));
         setIsPointTop(Math.floor(Math.random() * 940));
         setIsRestart(false);
@@ -64,6 +65,8 @@ export default function About() {
       }
       // End of game if time ends
       if (isTime <= 0) {
+        setIsPointLeft(null);
+        setIsPointTop(null);
         setIsTimeEnd(true);
         setIsStart(false);
       }
@@ -271,14 +274,16 @@ export default function About() {
         </button>
         {/* Point */}
 
-        <img
-          src="bluepoint.png"
-          className="z-40 absolute max-w-8 drop-shadow-md"
-          style={{
-            bottom: `${isPointTop}px`,
-            left: `${isPointLeft}px`,
-          }}
-        />
+        {isPointLeft ? (
+          <img
+            src="bluepoint.png"
+            className="z-40 absolute max-w-8 drop-shadow-md"
+            style={{
+              bottom: `${isPointTop}px`,
+              left: `${isPointLeft}px`,
+            }}
+          />
+        ) : null}
         {/* <div
           className="z-40 absolute"
           style={{
