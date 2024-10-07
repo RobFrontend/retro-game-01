@@ -56,7 +56,7 @@ export default function About() {
           setIsDanger3Left(Math.floor(Math.random() * 1560));
           setIsDanger3Top(Math.floor(Math.random() * 940));
         }
-      }, 5000);
+      }, 2000);
       return () => clearInterval(danger2Position);
     }
   }, [isScore]);
