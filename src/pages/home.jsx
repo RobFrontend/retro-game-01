@@ -346,10 +346,10 @@ export default function About() {
         )}
 
         {isInfo ? (
-          <div>
-            <h2 className="text-center p-4 text-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-900 text-slate-200">
+          <div className=" p-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-slate-900 text-slate-200 grid gap-3">
+            <h2 className="text-center text-2xl ">
               1* If your screen resolution is{" "}
-              <span className="font-bold">less then 1920x1080</span> and you
+              <span className="font-bold">less than 1920x1080</span> and you
               dont have full screen mode option just go with{" "}
               <span className="font-bold">'ctrl' + '-'</span> to fit the game
               screen to your resolution.<br></br>
@@ -361,6 +361,10 @@ export default function About() {
               3* Click on car to start! Have Fun!<br></br>*******<br></br>
               Game is only for desktop right now - You need keyboard
             </h2>
+            <img
+              src="look.webp"
+              className="border-slate-50 border-2 self-center justify-self-center"
+            />
           </div>
         ) : null}
         {/* Car */}
